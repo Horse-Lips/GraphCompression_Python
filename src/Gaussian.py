@@ -48,18 +48,3 @@ def compress(graph: list[list[int]], terminals: list[int]) -> list[list[int]]:
             del node[non_terminal]
         
     return graph_compressed
-
-
-g = [#0  1   2   3   4
-    [0,  20, 0,  0,  50],   #0
-    [20, 0,  15, 10, 0],    #1
-    [0,  15, 0,  0,  0],    #2
-    [0,  10, 0,  0,  0],    #3
-    [50, 0,  0,  0,  0]     #4
-]
-
-t = [0, 3, 4]
-
-
-for node in compress(g, t):
-    print(node)
