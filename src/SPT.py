@@ -87,17 +87,3 @@ def dijkstra(graph: list[list[int]], start_node: int) -> list[int]:
                 heapq.heappush(prioq, (neighbour_dist, neighbour_node))
 
     return list(nodes_kept)
-
-
-graph = [
-    [0,  20, 0,  0,  50],
-    [20, 0,  15, 10, 0 ],
-    [0,  15, 0,  0,  0 ],
-    [0,  10, 0,  0,  0 ],
-    [50, 0,  0,  0, 0 ]
-]
-
-terminals = [0, 3, 4]
-
-for node in compress(graph, terminals):
-    print(node)

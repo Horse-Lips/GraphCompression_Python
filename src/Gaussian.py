@@ -52,17 +52,3 @@ def compress(graph: list[list[int]], terminals: list[int]) -> list[list[int]]:
             del node[to_remove]
 
     return graph_compressed
-
-
-graph = [
-    [0,  20, 0,  0,  50],
-    [20, 0,  15, 10, 0 ],
-    [0,  15, 0,  0,  0 ],
-    [0,  10, 0,  0,  0 ],
-    [50, 0,  0,  0, 0 ]
-]
-
-terminals = [0, 3, 4]
-
-for node in compress(graph, terminals):
-    print(node)
