@@ -14,37 +14,55 @@ __license__ = "MIT"
 
 def compress(graph: list[list[int]], terminals: list[int]) -> list[list[int]]:
     """
-    Compress uses the Gaussian elimination method to compress a graph
-    
+    compress uses the Gaussian elimination method to compress a graph
+
     Args:
         graph:     A graph given as a weight matrix
         terminals: A set of terminal nodes as a list of ints
-    
+
     Returns:
         graph_compressed: The compressed graph as a weight matrix
     """
     graph_compressed = copy.deepcopy(graph)
     
+    nodes_remove = []
+    
     for non_terminal in range(len(graph)):
         if non_terminal in terminals: continue  #Ignore terminal nodes
+        nodes_remove.append(non_terminal)
         
-        for start_index in range(len(graph_compressed)):
-            start_weight = graph_compressed[non_terminal][start_index]  # Weight of edge between start and non_terminal
+        for start_index, start_weight in enumerate(graph_compressed[non_terminal]):
             if start_weight == 0: continue  # Ignore nodes with no edge
-            
-            for end_index in range(len(graph_compressed)):
-                end_weight = graph_compressed[non_terminal][end_index]  # Weight of edge between end and non_terminal
+
+            for end_index, end_weight in enumerate(graph_compressed[non_terminal]):
                 if end_weight == 0 or start_index == end_index: continue    # Also skip if start = end
-                
+
                 current_weight = graph_compressed[start_index][end_index]   # Weight of old edge
                 new_weight = start_weight + end_weight                      # Weight of new edge
-                
+
                 if current_weight == 0 or new_weight < current_weight:      # Update edge weight to be shortest > 0
                     graph_compressed[start_index][end_index] = new_weight
                     graph_compressed[end_index][start_index] = new_weight
-            
-        del graph_compressed[non_terminal]  # Delete non-terminal rows/columns
+
+    nodes_remove.sort(reverse = True)
+    
+    for to_remove in nodes_remove:
+        del graph_compressed[to_remove]  # Delete non-terminal rows/columns
         for node in graph_compressed:
-            del node[non_terminal]
-        
+            del node[to_remove]
+
     return graph_compressed
+
+
+graph = [
+    [0,  20, 0,  0,  50],
+    [20, 0,  15, 10, 0 ],
+    [0,  15, 0,  0,  0 ],
+    [0,  10, 0,  0,  0 ],
+    [50, 0,  0,  0, 0 ]
+]
+
+terminals = [0, 3, 4]
+
+for node in compress(graph, terminals):
+    print(node)
