@@ -29,7 +29,7 @@ def compress(graph: list[list[int]], terminals: list[int]) -> list[list[int]]:
 
     for non_terminal in range(len(graph)):
         if non_terminal in terminals:
-            continue  #Ignore terminal nodes
+            continue    # Ignore terminal nodes
 
         nodes_remove.append(non_terminal)
 

@@ -80,7 +80,8 @@ def dijkstra(graph: list[list[int]], start_node: int) -> list[int]:
 
     while prioq:
         current_dist, current_node = heapq.heappop(prioq)
-        if current_dist > dists[current_node]: continue  # Skip if dist is greater than lowest found
+        if current_dist > dists[current_node]:
+            continue    # Skip if dist is greater than lowest found
 
         for neighbour_node, neighbour_weight in enumerate(graph[current_node]):
             if neighbour_weight == 0:
