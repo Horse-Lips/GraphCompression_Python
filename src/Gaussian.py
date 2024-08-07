@@ -24,18 +24,22 @@ def compress(graph: list[list[int]], terminals: list[int]) -> list[list[int]]:
         graph_compressed: The compressed graph as a weight matrix
     """
     graph_compressed = copy.deepcopy(graph)
-    
+
     nodes_remove = []
-    
+
     for non_terminal in range(len(graph)):
-        if non_terminal in terminals: continue  #Ignore terminal nodes
+        if non_terminal in terminals:
+            continue  #Ignore terminal nodes
+
         nodes_remove.append(non_terminal)
-        
+
         for start_index, start_weight in enumerate(graph_compressed[non_terminal]):
-            if start_weight == 0: continue  # Ignore nodes with no edge
+            if start_weight == 0:
+                continue  # Ignore nodes with no edge
 
             for end_index, end_weight in enumerate(graph_compressed[non_terminal]):
-                if end_weight == 0 or start_index == end_index: continue    # Also skip if start = end
+                if end_weight == 0 or start_index == end_index:
+                    continue    # Also skip if start = end
 
                 current_weight = graph_compressed[start_index][end_index]   # Weight of old edge
                 new_weight = start_weight + end_weight                      # Weight of new edge
@@ -44,8 +48,8 @@ def compress(graph: list[list[int]], terminals: list[int]) -> list[list[int]]:
                     graph_compressed[start_index][end_index] = new_weight
                     graph_compressed[end_index][start_index] = new_weight
 
-    nodes_remove.sort(reverse = True)
-    
+    nodes_remove.sort(reverse=True)
+
     for to_remove in nodes_remove:
         del graph_compressed[to_remove]  # Delete non-terminal rows/columns
         for node in graph_compressed:

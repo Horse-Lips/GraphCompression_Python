@@ -1,4 +1,13 @@
+#!/usr/bin/env python
+
+"""
+    Gaussian_test.py: Performs a set of tests for the Gaussian.py compress method
+"""
+
 from Gaussian import compress
+
+__author__ = "Jake Haakanson"
+__license__ = "MIT"
 
 
 graph_small = [
